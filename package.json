@@ -1,0 +1,17 @@
+{
+  "name": "hereafter",
+  "version": "1.0.0",
+  "description": "Asynchronous assertion library for fast, high-level behavioral testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "asynchronous",
+    "assertion",
+    "test",
+    "funtctional"
+  ],
+  "author": "Michael Lawrie",
+  "license": "MIT"
+}
