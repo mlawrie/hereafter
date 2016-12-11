@@ -1,0 +1,1 @@
+module.exports = (fn) => process.nextTick(fn);
