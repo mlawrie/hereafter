@@ -17,12 +17,28 @@ const extractChainableTermsFromChai = (chai) => {
 const hereafter = (testBodyFn) => {
   const capturers = [];
   
-  const expect = (...args) => {
-    const capturer = expectationEvaluator(args, captureChaiChain(chaiChainableTerms), expectImpl);
+  const expect = (func) => {
+    const capturer = expectationEvaluator(func, captureChaiChain(chaiChainableTerms), expectImpl);
     capturer.stack = new Error().stack;
     capturers.push(capturer);
     return capturer.returnValue.returnValue;
   };
+
+  const when = (block) => {
+    capturers.push({
+      type: 'when',
+      evaluate: () => {
+        const retVal = block();
+          
+        if (typeof retVal !== 'undefined' && typeof retVal.then === 'function') {
+          return retVal;
+        } else {
+          return Promise.resolve();
+        }
+      }
+
+    });
+  }
 
   const evaluateUntilFinished = () => {
     let capturer = capturers.shift()
@@ -34,7 +50,7 @@ const hereafter = (testBodyFn) => {
   };
 
   return () => {
-    testBodyFn(expect);
+    testBodyFn(expect, when);
     return evaluateUntilFinished();
   };
 };

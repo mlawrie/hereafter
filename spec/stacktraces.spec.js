@@ -9,6 +9,8 @@ describe('stacktraces', () => {
 
   xit('should include real trace below', () => {
   });
+
+  xit('should point to when block', () => {});
   
 });
 

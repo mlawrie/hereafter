@@ -3,13 +3,13 @@
 const {realExpect, hereafter, captureError} = require('./util');
 const sinon = require('sinon');
 
-describe('async behavior', (realDone) => {
+describe('async expectations', (realDone) => {
   it('should not fail when something which is initially false will become true asynchronously', () => {
     return hereafter((expect, when) => {
       
       let array = [1, 2];
       
-      expect(array).to.have.lengthOf(3);
+      expect(() => array).to.have.lengthOf(3);
 
       process.nextTick(() => {
         array.push(3);
@@ -25,8 +25,8 @@ describe('async behavior', (realDone) => {
 
     return hereafter((expect, when) => {
         
-      expect('cats').to.satisfy(stub1);
-      expect('hats').to.satisfy(stub2);
+      expect(() => 'cats').to.satisfy(stub1);
+      expect(() => 'hats').to.satisfy(stub2);
 
       process.nextTick(() => {
         stub1.returns(true);
@@ -45,9 +45,9 @@ describe('async behavior', (realDone) => {
     const stub3 = sinon.stub().returns(true);
 
     return hereafter((expect, when) => {
-      expect([1, 2]).to.satisfy(stub1);
-      expect([1, 2]).to.satisfy(stub2);
-      expect([1, 2]).to.satisfy(stub3);
+      expect(() => [1, 2]).to.satisfy(stub1);
+      expect(() => [1, 2]).to.satisfy(stub2);
+      expect(() => [1, 2]).to.satisfy(stub3);
     })().then(() => {
       realExpect(stub1.called).to.be.true;
       realExpect(stub2.called).to.be.true;
@@ -61,9 +61,9 @@ describe('async behavior', (realDone) => {
     const stub3 = sinon.stub().returns(true);
 
     return hereafter((expect, when) => {
-      expect([1, 2]).to.satisfy(stub1);
-      expect([1, 2]).to.satisfy(stub2);
-      expect([1, 2]).to.satisfy(stub3);
+      expect(() => [1, 2]).to.satisfy(stub1);
+      expect(() => [1, 2]).to.satisfy(stub2);
+      expect(() => [1, 2]).to.satisfy(stub3);
     })().then(() => {
       realExpect(stub1.calledBefore(stub2)).to.be.true;
       realExpect(stub1.calledBefore(stub3)).to.be.true;
@@ -73,9 +73,9 @@ describe('async behavior', (realDone) => {
 
   it('should fail even if only last expectation fails', () => {
     return hereafter((expect, when) => {
-      expect(true).to.be.true;
-      expect(true).to.be.true;
-      expect(true).to.be.false;
+      expect(() => true).to.be.true;
+      expect(() => true).to.be.true;
+      expect(() => true).to.be.false;
     })().then(() => {
       throw new Error('this should not be called');
     }).catch(e => {
@@ -90,8 +90,8 @@ describe('async behavior', (realDone) => {
 
     return hereafter((expect, when) => {
         
-      expect('cats').to.satisfy(stub1);
-      expect('hats').to.satisfy(stub2);
+      expect(() => 'cats').to.satisfy(stub1);
+      expect(() => 'hats').to.satisfy(stub2);
 
     })().catch(() => {})
     .then(() => {

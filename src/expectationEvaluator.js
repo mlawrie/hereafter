@@ -9,16 +9,16 @@ const buildMoreInformativeError = (actualError, capturedStack) => {
   return actualError;
 };
 
-const expectationEvaluator = (invokedWith, chainCapturer, wrappedExpectImpl) => {
+const expectationEvaluator = (getComparator, chainCapturer, wrappedExpectImpl) => {
   const capturer = {};
   let attemptsLeft = 5;
 
   capturer.returnValue = chainCapturer;
   
-  capturer.getInfo = () => ({type: 'expect', invokedWith, chain: chainCapturer.getChain()});
+  capturer.getInfo = () => ({type: 'expect', getComparator, chain: chainCapturer.getChain()});
   
   const evaluateOnce = () => {
-    let partialExpectation = wrappedExpectImpl(...invokedWith);
+    let partialExpectation = wrappedExpectImpl(getComparator());
     chainCapturer.getChain().forEach((link) => {
       try {
         if (link.invokedWith) {
