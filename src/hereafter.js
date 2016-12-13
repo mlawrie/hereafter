@@ -1,6 +1,6 @@
 'use strict';
 const scheduler = require('./scheduler');
-const captureChaiChain = require('./captureChaiChain');
+const captureExpectation = require('./captureExpectation');
 const expectationEvaluator = require('./expectationEvaluator');
 
 let expectImpl;
@@ -18,7 +18,7 @@ const hereafter = (testBodyFn) => {
   const capturers = [];
   
   const expect = (func) => {
-    const capturer = expectationEvaluator(func, captureChaiChain(chaiChainableTerms), expectImpl);
+    const capturer = expectationEvaluator(func, captureExpectation(chaiChainableTerms), expectImpl);
     capturer.stack = new Error().stack;
     capturers.push(capturer);
     return capturer.returnValue.returnValue;
@@ -41,12 +41,11 @@ const hereafter = (testBodyFn) => {
   }
 
   const evaluateUntilFinished = () => {
-    let capturer = capturers.shift()
+    const capturer = capturers.shift();
     
-    if (!capturer) {
-      return;
+    if (capturer) {
+      return capturer.evaluate().then(evaluateUntilFinished);
     }
-    return capturer.evaluate().then(evaluateUntilFinished);
   };
 
   return () => {
