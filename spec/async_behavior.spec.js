@@ -2,7 +2,7 @@
 
 const {realExpect, hereafter, captureError} = require('./util');
 
-describe('async behavior', () => {
+describe('async behavior', (realDone) => {
   it('should not fail when something which is initially false will become true asynchronously', () => {
     const test = hereafter((expect, when) => {
       
@@ -16,7 +16,12 @@ describe('async behavior', () => {
       
     });
 
-    realExpect(captureError(test)).to.be.undefined;
+    const done = () => {
+      realExpect(captureError(test)).to.be.undefined;
+      realDone();
+    };
+
+    test(done);
   });
   
 });
