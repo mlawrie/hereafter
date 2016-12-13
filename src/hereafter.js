@@ -1,5 +1,7 @@
+'use strict';
 const scheduler = require('./scheduler');
 const captureChaiChain = require('./captureChaiChain');
+const expectationEvaluator = require('./expectationEvaluator');
 
 let expectImpl;
 let chaiChainableTerms = [];
@@ -10,6 +12,15 @@ const extractChainableTermsFromChai = (chai) => {
 
   return Object.getOwnPropertyNames(Assertion.prototype)
     .map(name => ({name, isChainable: isChainableMethod(name)}));
+};
+
+const buildMoreInformativeError = (actualError, capturedStack) => {
+  const actualMessage = actualError.stack.split('\n')[0] + '\n';
+  const capturedTrace = capturedStack.split('\n').slice(2).join('\n') + '\n';
+  const actualTrace = actualError.stack.split('\n').slice(1).join('\n');
+
+  actualError.stack = actualMessage + capturedTrace + actualTrace;
+  return actualError;
 };
 
 
@@ -29,11 +40,7 @@ const expectCapturer = (invokedWith) => {
           thing = thing[link.term];
         }  
       } catch (e) {
-        const moreInformativeStackTrace = e.stack.split('\n')[0] + '\n'
-          + capturer.stack.split('\n').slice(2).join('\n') + '\n'
-          + e.stack.split('\n').slice(1).join('\n');
-        e.stack = moreInformativeStackTrace
-        throw e;
+        throw buildMoreInformativeError(e, capturer.stack);
       }
     });
   };
@@ -45,7 +52,7 @@ const hereafter = (testBodyFn) => {
   const capturers = [];
   
   const expect = (...args) => {
-    const capturer = expectCapturer(args);
+    const capturer = expectationEvaluator(args, captureChaiChain(chaiChainableTerms), expectImpl);
     capturer.stack = new Error().stack;
     capturers.push(capturer);
     return capturer.returnValue.returnValue;
@@ -53,12 +60,7 @@ const hereafter = (testBodyFn) => {
 
   return (done) => {
     testBodyFn(expect);
-    setTimeout(() => {
-      capturers.forEach((c) => console.log(c.getInfo()));
-      capturers.forEach((c) => c.invoke());
-      done();
-    }, 100);
-    
+    capturers.forEach((c) => c.evaluate());
   };
 };
 

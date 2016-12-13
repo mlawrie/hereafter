@@ -4,7 +4,7 @@
   "description": "Asynchronous assertion library for fast, high-level behavioral testing",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha ./spec/*.spec.js"
   },
   "keywords": [
     "asynchronous",

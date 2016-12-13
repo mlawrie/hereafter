@@ -1,3 +1,5 @@
+'use strict';
+
 const chai = require('chai');
 const hereafter = require('./hereafter');
 hereafter.useChaiExpect(chai);

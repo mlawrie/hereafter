@@ -5,3 +5,4 @@
 - Tests
 - Docs
 - Jasmine support
+- ES5 support?
