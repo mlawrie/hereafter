@@ -14,40 +14,6 @@ const extractChainableTermsFromChai = (chai) => {
     .map(name => ({name, isChainable: isChainableMethod(name)}));
 };
 
-const buildMoreInformativeError = (actualError, capturedStack) => {
-  const actualMessage = actualError.stack.split('\n')[0] + '\n';
-  const capturedTrace = capturedStack.split('\n').slice(2).join('\n') + '\n';
-  const actualTrace = actualError.stack.split('\n').slice(1).join('\n');
-
-  actualError.stack = actualMessage + capturedTrace + actualTrace;
-  return actualError;
-};
-
-
-const expectCapturer = (invokedWith) => {
-  const capturer = {};
-  const chainCapturer = captureChaiChain(chaiChainableTerms);
-
-  capturer.returnValue = chainCapturer;
-  capturer.getInfo = () => ({type: 'expect', invokedWith, chain: chainCapturer.getChain()});
-  capturer.invoke = () => {
-    let thing = expectImpl(...invokedWith);
-    chainCapturer.getChain().forEach((link) => {
-      try {
-        if (link.invokedWith) {
-          thing = thing[link.term](...link.invokedWith);
-        } else {
-          thing = thing[link.term];
-        }  
-      } catch (e) {
-        throw buildMoreInformativeError(e, capturer.stack);
-      }
-    });
-  };
-  return capturer;
-}
-
-
 const hereafter = (testBodyFn) => {
   const capturers = [];
   
