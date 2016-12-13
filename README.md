@@ -37,6 +37,11 @@ Hereafter defers evaluation of each line in your tests until the promises and ca
 
 Behind the scenes, Hereafter implements a similar polling scheme for expectations that you will find implemented in every functional testing tool. The key difference is that the polling happens much, much faster since there is far less overhead given that there is no web browser or DOM.
 
+## Why use this tool?
+
+A suite of high-level behavioral tests that execute quickly is extremely valuable. It makes it easy and safe to refactor your code and help you safely deliver changes to production. The problem is that these tests aren't very easy to write or maintain. Relatively deep understanding of asynchronous javascript can be necessary to write useful tests at this level and that discourages many teams.
+
+Hereafter sidesteps this problem entirely by making these tests look and work like regular low-level tests.
 
 
 ## Todo
