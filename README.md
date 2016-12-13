@@ -1,6 +1,8 @@
 #Hereafter
 
-Hereafter is a testing tool which makes it easy to write tests for asynchronous code. It's specifically designed to make it simple to write high-level functional tests that can provide similar coverage to your Selenium/Webdriver/Nightwatch/etc tests but execute several orders of magnitude faster.
+#### Hereafter is a testing tool which makes it easy to write tests for asynchronous code.
+
+##### It's specifically designed to make it simple to write high-level functional tests that can provide similar coverage to your Selenium/Webdriver/Nightwatch/etc tests but execute several orders of magnitude faster.
 
 ```javascript
 
@@ -23,9 +25,16 @@ it('should be easy to write fast behavioral tests', hereafter(expect, when) => {
   expect(() => app.text()).to.contain('My Account: You have 150 points!');
 });
 
+
+## How does it work?
+
+Hereafter defers evaluation of each line in your tests until the promises and callbacks triggered by previous lines have completed. In essence, it lets you ignore the fact that your code is asynchronous and write tests as though it were purely synchronous code.
+
+Behind the scenes, Hereafter implements a similar polling scheme for expectations that you will find implemented in every functional testing tool. The key difference is that the polling happens much, much faster since there is far less overhead given that there is no web browser or DOM.
+
 ```
 
-#Todo
+## Todo
 - Improve Scheduler
 - Figure out how many poll attempts
 - Implement (much) longer polling for non-mocked endpoints
