@@ -1,4 +1,5 @@
 #Hereafter
+![travis build](https://travis-ci.org/mlawrie/hereafter.svg?branch=master)
 
 ## Hereafter makes it easy to write tests for asynchronous code
 
