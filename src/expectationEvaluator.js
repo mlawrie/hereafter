@@ -1,3 +1,5 @@
+const scheduler = require('./scheduler');
+
 const buildMoreInformativeError = (actualError, capturedStack) => {
   const actualMessage = actualError.stack.split('\n')[0] + '\n';
   const capturedTrace = capturedStack.split('\n').slice(2).join('\n') + '\n';
@@ -9,12 +11,13 @@ const buildMoreInformativeError = (actualError, capturedStack) => {
 
 const expectationEvaluator = (invokedWith, chainCapturer, wrappedExpectImpl) => {
   const capturer = {};
-  
+  let attemptsLeft = 5;
+
   capturer.returnValue = chainCapturer;
   
   capturer.getInfo = () => ({type: 'expect', invokedWith, chain: chainCapturer.getChain()});
   
-  capturer.evaluate = () => {
+  const evaluateOnce = () => {
     let partialExpectation = wrappedExpectImpl(...invokedWith);
     chainCapturer.getChain().forEach((link) => {
       try {
@@ -25,6 +28,20 @@ const expectationEvaluator = (invokedWith, chainCapturer, wrappedExpectImpl) => 
         }  
       } catch (e) {
         throw buildMoreInformativeError(e, capturer.stack);
+      }
+    });
+  };
+
+  capturer.evaluate = () => {
+    return new Promise(resolve => {
+      evaluateOnce();
+      resolve();
+    }).catch((e) => {
+      if (attemptsLeft > 0) {
+        attemptsLeft -= 1;
+        return capturer.evaluate();
+      } else {
+        throw e;
       }
     });
   };

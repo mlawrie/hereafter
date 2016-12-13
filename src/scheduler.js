@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = (fn) => process.nextTick(fn);
+module.exports = () => new Promise(resolve => process.nextTick(resolve));

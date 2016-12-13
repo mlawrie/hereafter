@@ -3,11 +3,11 @@ const realExpect = chai.expect;
 const hereafter = require('../src/hereafter');
 hereafter.useChaiExpect(chai);
 
-const captureError = (fn) => {
+const captureError = (hereafterTest, done) => {
   try {
-    fn();
+    hereafterTest(done);
   } catch (e) {
-    return e;
+    done(e);
   }
 };
 

@@ -58,9 +58,21 @@ const hereafter = (testBodyFn) => {
     return capturer.returnValue.returnValue;
   };
 
-  return (done) => {
+
+  // const evaluateNext = (done) => {
+  //   let capturer = capturers.shift()
+    
+  //   if (!capturer) {
+  //     done();
+  //     return;
+  //   }
+
+  //   capturer.evaluate(() => evaluateNext(done));
+  // };
+
+  return () => {
     testBodyFn(expect);
-    capturers.forEach((c) => c.evaluate());
+    return capturers[0].evaluate();
   };
 };
 
