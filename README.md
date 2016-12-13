@@ -1,6 +1,6 @@
 #Hereafter
 
-Hereafter is a testing library which makes it easy to write tests for async code. It's specifically designed to make it simple to write high-level functional tests that can provide similar coverage to your Selenium/Webdriver/Nightwatch/etc tests but execute several orders of magnitude faster.
+Hereafter is a testing tool which makes it easy to write tests for asynchronous code. It's specifically designed to make it simple to write high-level functional tests that can provide similar coverage to your Selenium/Webdriver/Nightwatch/etc tests but execute several orders of magnitude faster.
 
 ```javascript
 
