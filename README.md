@@ -4,6 +4,8 @@
 
 Hereafter lets you write concise, high-level, functional tests that provide similar coverage to your Selenium/Webdriver/Nightwatch/etc tests but execute hundreds or even thousands of times faster.
 
+At the momement, this only works with Mocha and Chai but Jest and Jasmine support will come shortly.
+
 ## An example
 
 ```javascript
@@ -38,10 +40,10 @@ Behind the scenes, Hereafter implements a similar polling scheme for expectation
 
 
 ## Todo
-- Improve Scheduler
+- Improve Scheduler to work on all platforms
 - Figure out how many poll attempts
 - Implement (much) longer polling for non-mocked endpoints
-- Test on browsers
-- Docs
 - Jasmine support
+- Jest support
+- Test scheduler and exception handling on browsers
 - ES5 support?
