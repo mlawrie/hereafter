@@ -6,13 +6,21 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha ./spec/*.spec.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mlawrie/hereafter.git"
+  },
   "keywords": [
     "asynchronous",
     "assertion",
     "test",
     "funtctional"
   ],
-  "author": "Michael Lawrie",
+  "author": {
+    "name": "Michael Lawrie",
+    "email": "michael@michaellawrie.com",
+    "url": "https://github.com/mlawrie"
+  },
   "license": "MIT",
   "devDependencies": {
     "chai": "^3.5.0",
