@@ -2,7 +2,7 @@
   "name": "hereafter",
   "version": "1.0.0",
   "description": "Asynchronous assertion library for fast, high-level behavioral testing",
-  "main": "index.js",
+  "main": "hereafter.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha ./spec/*.spec.js"
   },
@@ -19,9 +19,6 @@
     "chai-as-promised": "^6.0.0",
     "mocha": "^3.2.0",
     "sinon": "^1.17.6"
-  },
-  "dependencies": {
-    "check-error": "^1.0.2"
   },
   "peerDependencies": {
     "chai": ">= 2.1.2 < 4"
