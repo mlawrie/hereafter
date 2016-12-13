@@ -11,7 +11,7 @@ At the momement, this only works with Mocha and Chai but Jest and Jasmine suppor
 ```javascript
 
 const chai = require('chai');
-const hereafter = require('../src/hereafter');
+const hereafter = require('hereafter');
 const {mount} = require('enzyme');
 const fetchMock = require('fetch-mock');
 
