@@ -2,7 +2,9 @@
 
 ## Hereafter makes it easy to write tests for asynchronous code
 
-#### Hereafter lets you write concise, high-level, functional tests that provide similar coverage to your Selenium/Webdriver/Nightwatch/etc tests but execute hundreds or even thousands of times faster.
+Hereafter lets you write concise, high-level, functional tests that provide similar coverage to your Selenium/Webdriver/Nightwatch/etc tests but execute hundreds or even thousands of times faster.
+
+## An example
 
 ```javascript
 
