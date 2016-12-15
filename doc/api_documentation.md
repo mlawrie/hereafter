@@ -23,10 +23,10 @@ it('should be easy to write fast behavioral tests', hereafter((expect, when) => 
   const app = mount(<MyCoolApp/>);
 
   when(() => { app.find('.login').simulate('click') });
-  expect(() => app.text()).to.contain('Welcome Back, SallySmith!');
+  expect(() => app.text()).toContain('Welcome Back, SallySmith!');
 
   when(() => { app.find('.my-account').simulate('click') });  
-  expect(() => app.text()).to.contain('My Account: You have 150 points!');
+  expect(() => app.text()).toContain('My Account: You have 150 points!');
 }));
 
 ```
@@ -41,7 +41,7 @@ const hereafter = require('hereafter');
 hereafter.useChaiExpect(chai);
 
 it('some test', hereafter((expect, when) => {
-  // ...
+  // your test here
 }));
 
 ```
