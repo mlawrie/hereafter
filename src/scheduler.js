@@ -1,3 +1,7 @@
 'use strict';
 
-module.exports = (cb) => new Promise(resolve => setTimeout(resolve, 0));
+module.exports = function() {
+  return new Promise(function(resolve) {
+    setTimeout(resolve, 0);
+  });
+};

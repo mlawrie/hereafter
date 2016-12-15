@@ -57,3 +57,4 @@ There are still some things let to do! This is really just notes for me right no
 - Jasmine support
 - React native example
 - Test scheduler and exception handling on browsers
+- Typings
