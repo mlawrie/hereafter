@@ -3,6 +3,7 @@
 const scheduler = require('./scheduler');
 const captureExpectation = require('./captureExpectation');
 const expectationEvaluator = require('./expectationEvaluator');
+const buildMoreInformativeError = require('./buildMoreInformativeError');
 
 let expectImpl;
 let chaiChainableTerms = [];
@@ -17,10 +18,15 @@ const extractChainableTermsFromChai = (chai) => {
 
 const hereafter = (testBodyFn) => {
   const capturers = [];
+  const originalStack = new Error().stack;
   
   const expect = (func) => {
+    if (typeof func !== 'function') {
+      throw buildMoreInformativeError(new Error(`Something other than a function passed into expect(): ${func}`), originalStack);
+    }
+
     const capturer = expectationEvaluator(func, captureExpectation(chaiChainableTerms), expectImpl);
-    capturer.stack = new Error().stack;
+    capturer.stack = originalStack;
     capturers.push(capturer);
     return capturer.returnValue.returnValue;
   };

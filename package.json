@@ -6,7 +6,8 @@
   "scripts": {
     "nodeTest": "./node_modules/mocha/bin/mocha ./spec/*.spec.js",
     "karmaTest": "./node_modules/karma/bin/karma start --single-run",
-    "test": "set -e; npm run nodeTest; npm run karmaTest"
+    "jestIntegrationTest": "./node_modules/jest/bin/jest.js spec/jestTest.test.js 2>&1 | grep --quiet \"1 failed, 1 passed, 2 total\"",
+    "test": "set -e; npm run nodeTest; npm run karmaTest; npm run jestIntegrationTest"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   "license": "MIT",
   "devDependencies": {
     "chai": "^3.5.0",
+    "jest": "^17.0.3",
     "karma": "^1.3.0",
     "karma-browserify": "^5.1.0",
     "karma-firefox-launcher": "^1.0.0",

@@ -1,19 +1,11 @@
 'use strict';
 
 const scheduler = require('./scheduler');
-
-const buildMoreInformativeError = (actualError, capturedStack) => {
-  const actualMessage = actualError.stack.split('\n')[0] + '\n';
-  const capturedTrace = capturedStack.split('\n').slice(2).join('\n') + '\n';
-  const actualTrace = actualError.stack.split('\n').slice(1).join('\n');
-
-  actualError.stack = actualMessage + capturedTrace + actualTrace;
-  return actualError;
-};
+const buildMoreInformativeError = require('./buildMoreInformativeError');
 
 const expectationEvaluator = (getComparator, chainCapturer, wrappedExpectImpl) => {
   const capturer = {};
-  let attemptsLeft = 5;
+  let attemptsLeft = 20;
 
   capturer.returnValue = chainCapturer;
   
