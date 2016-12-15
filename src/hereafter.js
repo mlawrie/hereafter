@@ -13,12 +13,12 @@ var extractChainableTermsFromChai = function(chai) {
   var isChainableMethod = function(name) { return Assertion.prototype.__methods.hasOwnProperty(name) };
 
   return Object.getOwnPropertyNames(Assertion.prototype)
-    .map(function(name) { return {name, isChainable: isChainableMethod(name)} });
+    .map(function(name) { return {name: name, isChainable: isChainableMethod(name)} });
 };
 
 var extractChainableTermsFromJest = function(expect) {
   return Object.getOwnPropertyNames(expect(1))
-    .map(function(name) { return {name, isChainable: name === 'not'}});
+    .map(function(name) { return {name: name, isChainable: name === 'not'}});
 }
 
 var hereafter = function(testBodyFn) {

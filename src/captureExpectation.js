@@ -16,7 +16,7 @@ var makeLink = function(terms, chain, lastLinkRecord) {
       return makeLink(terms, chain, thisLinkRecord);
     };
 
-    Object.defineProperty(instance, term.name, {get});
+    Object.defineProperty(instance, term.name, {get: get});
   });
 
   return instance;
