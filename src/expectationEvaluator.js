@@ -1,18 +1,18 @@
 'use strict';
 
-const scheduler = require('./scheduler');
-const buildMoreInformativeError = require('./buildMoreInformativeError');
+var scheduler = require('./scheduler');
+var buildMoreInformativeError = require('./buildMoreInformativeError');
 
-const expectationEvaluator = function(getComparator, chainCapturer, wrappedExpectImpl) {
-  const evaluator = {};
-  let attemptsLeft = 20;
+var expectationEvaluator = function(getComparator, chainCapturer, wrappedExpectImpl) {
+  var evaluator = {};
+  var attemptsLeft = 20;
 
   evaluator.returnValue = chainCapturer;
   
   evaluator.getInfo = function() { return {type: 'expect', getComparator, chain: chainCapturer.getChain()} };
   
-  const evaluateOnce = function() {
-    let partialExpectation = wrappedExpectImpl(getComparator());
+  var evaluateOnce = function() {
+    var partialExpectation = wrappedExpectImpl(getComparator());
     chainCapturer.getChain().forEach(function(link) {
       try {
         if (link.invokedWith) {

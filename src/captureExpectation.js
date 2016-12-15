@@ -1,12 +1,12 @@
 'use strict';
-const makeLink = function(terms, chain, lastLinkRecord) {
-  const instance = function(...invokedArgs) {
+var makeLink = function(terms, chain, lastLinkRecord) {
+  var instance = function(...invokedArgs) {
     lastLinkRecord.invokedWith = invokedArgs;
   };
 
   terms.forEach(function(term) {
-    const get = function() {
-      const thisLinkRecord = {term: term.name};
+    var get = function() {
+      var thisLinkRecord = {term: term.name};
 
       if (!term.isChainable) {
         thisLinkRecord.stack = new Error().stack;
@@ -23,8 +23,8 @@ const makeLink = function(terms, chain, lastLinkRecord) {
 };
 
 module.exports = function(terms) {
-  const chain = [];
-  const instance = {};
+  var chain = [];
+  var instance = {};
   instance.getChain = function() { return chain };
   instance.returnValue = makeLink(terms, chain, {});
   return instance;
