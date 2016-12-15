@@ -48,7 +48,11 @@ A suite of high-level behavioral tests that execute quickly is extremely valuabl
 Hereafter sidesteps this problem entirely by making these tests look and work like regular low-level tests.
 
 ## Todo
-- Figure out how many poll attempts
+
+There are still some things let to do! This is really just notes for me right now.
+
+- Allow configuration of number of poll attempts
+- Improve test coverage of stacktract handling
 - Implement (much) longer polling for non-mocked endpoints
 - Jasmine support
 - React native example

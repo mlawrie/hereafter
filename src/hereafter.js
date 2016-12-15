@@ -6,7 +6,7 @@ const expectationEvaluator = require('./expectationEvaluator');
 const buildMoreInformativeError = require('./buildMoreInformativeError');
 
 let expectImpl;
-let chaiChainableTerms = [];
+let expectationChainTerms = [];
 
 const extractChainableTermsFromChai = (chai) => {
   const Assertion = chai.Assertion;
@@ -30,7 +30,7 @@ const hereafter = (testBodyFn) => {
       throw buildMoreInformativeError(new Error(`Something other than a function passed into expect(): ${func}`), originalStack);
     }
 
-    const capturer = expectationEvaluator(func, captureExpectation(chaiChainableTerms), expectImpl);
+    const capturer = expectationEvaluator(func, captureExpectation(expectationChainTerms), expectImpl);
     capturer.stack = originalStack;
     capturers.push(capturer);
     return capturer.returnValue.returnValue;
@@ -68,12 +68,12 @@ const hereafter = (testBodyFn) => {
 
 hereafter.useChaiExpect = (chai) => {
   expectImpl = chai.expect;
-  chaiChainableTerms = extractChainableTermsFromChai(chai);
+  expectationChainTerms = extractChainableTermsFromChai(chai);
 };
 
 hereafter.useJestExpect = (expect) => {
   expectImpl = expect;
-  chaiChainableTerms = extractChainableTermsFromJest(expect);
+  expectationChainTerms = extractChainableTermsFromJest(expect);
 };
 
 

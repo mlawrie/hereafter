@@ -4,12 +4,12 @@ const scheduler = require('./scheduler');
 const buildMoreInformativeError = require('./buildMoreInformativeError');
 
 const expectationEvaluator = (getComparator, chainCapturer, wrappedExpectImpl) => {
-  const capturer = {};
+  const evaluator = {};
   let attemptsLeft = 20;
 
-  capturer.returnValue = chainCapturer;
+  evaluator.returnValue = chainCapturer;
   
-  capturer.getInfo = () => ({type: 'expect', getComparator, chain: chainCapturer.getChain()});
+  evaluator.getInfo = () => ({type: 'expect', getComparator, chain: chainCapturer.getChain()});
   
   const evaluateOnce = () => {
     let partialExpectation = wrappedExpectImpl(getComparator());
@@ -21,26 +21,26 @@ const expectationEvaluator = (getComparator, chainCapturer, wrappedExpectImpl) =
           partialExpectation = partialExpectation[link.term];
         }  
       } catch (e) {
-        throw buildMoreInformativeError(e, capturer.stack);
+        throw buildMoreInformativeError(e, evaluator.stack);
       }
     });
   };
 
-  capturer.evaluate = () => {
+  evaluator.evaluate = () => {
     return new Promise(resolve => {
       evaluateOnce();
       resolve();
     }).catch((e) => {
       if (attemptsLeft > 0) {
         attemptsLeft -= 1;
-        return scheduler().then(capturer.evaluate);
+        return scheduler().then(evaluator.evaluate);
       } else {
         throw e;
       }
     });
   };
 
-  return capturer;
+  return evaluator;
 }
 
 module.exports = expectationEvaluator;
