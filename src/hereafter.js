@@ -11,14 +11,16 @@ var expectationChainTerms = [];
 var extractChainableTermsFromChai = function(chai) {
   var Assertion = chai.Assertion;
   var isChainableMethod = function(name) { return Assertion.prototype.__methods.hasOwnProperty(name) };
+  var isFunction = function(name) { return typeof Object.getOwnPropertyDescriptor(Assertion.prototype, name).value === 'function' };
 
   return Object.getOwnPropertyNames(Assertion.prototype)
-    .map(function(name) { return {name: name, isChainable: isChainableMethod(name)} });
+    .filter(function(name) { return name !== 'arguments' })
+    .map(function(name) { return {name: name, isChainable: isChainableMethod(name), isFunction: isFunction(name) } });
 };
 
 var extractChainableTermsFromJest = function(expect) {
   return Object.getOwnPropertyNames(expect(1))
-    .map(function(name) { return {name: name, isChainable: name === 'not'}});
+    .map(function(name) { return {name: name, isChainable: name === 'not', isFunction: name !== 'not'}; });
 }
 
 var hereafter = function(testBodyFn) {

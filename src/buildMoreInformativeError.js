@@ -1,4 +1,4 @@
-"use strict";
+//If you add use strict to this file it will break phantomjs :(
 
 module.exports = function(actualError, capturedStack) {
   var actualMessage = actualError.stack.split('\n')[0] + '\n';
