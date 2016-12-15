@@ -11,7 +11,9 @@ module.exports = function(config) {
       'spec/*.spec.js': ['browserify']
     },
     plugins: [
-      'karma-browserify'
+      'karma-browserify',
+      'karma-mocha',
+      'karma-firefox-launcher'
     ]
   });
 };
