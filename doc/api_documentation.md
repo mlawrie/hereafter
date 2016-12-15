@@ -47,4 +47,34 @@ it('some test', hereafter(expect, when) => {
 ```
 
 ## Working with Mocha and Chai
+
+Here's an example of using Hereafter with Mocha and Chai:
+
+```javascript
+
+const chai = require('chai');
+const hereafter = require('hereafter');
+const {mount} = require('enzyme');
+const fetchMock = require('fetch-mock');
+
+hereafter.useChaiExpect(chai);
+
+it('should be easy to write fast behavioral tests', hereafter(expect, when) => {
+  fetchMock.get('/login', {username: 'SallySmith'});
+  fetchMock.get('/myAccount', {points: 150});
+  const app = mount(<MyCoolApp/>);
+
+  when(() => { app.find('.login').simulate('click') });
+  expect(() => app.text()).to.contain('Welcome Back, SallySmith!');
+
+  when(() => { app.find('.my-account').simulate('click') });  
+  expect(() => app.text()).to.contain('My Account: You have 150 points!');
+});
+
+```
+
+At this time, Chai is the only expectation library supported for Mocha.
+
 ## Working with Jasmine
+
+Hereafter doesn't support Jasmine yet! It will soon!
