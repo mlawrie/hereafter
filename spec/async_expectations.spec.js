@@ -3,7 +3,7 @@
 const {realExpect, hereafter, captureError} = require('./util');
 const sinon = require('sinon');
 
-describe('async expectations', (realDone) => {
+describe('async expectations', () => {
   it('should not fail when something which is initially false will become true asynchronously', () => {
     return hereafter((expect, when) => {
       
@@ -15,6 +15,13 @@ describe('async expectations', (realDone) => {
         array.push(3);
       }, 0);
       
+    })();
+  });
+
+  it('should accept to contain expectation', () => {
+    return hereafter((expect, when) => {
+      
+      expect(() => [1,2]).to.contain(1);
     })();
   });
 

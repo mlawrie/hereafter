@@ -11,7 +11,9 @@ var expectationChainTerms = [];
 var extractChainableTermsFromChai = function(chai) {
   var Assertion = chai.Assertion;
   var isChainableMethod = function(name) { return Assertion.prototype.__methods.hasOwnProperty(name) };
-  var isFunction = function(name) { return typeof Object.getOwnPropertyDescriptor(Assertion.prototype, name).value === 'function' };
+  var isFunction = function(name) {
+    return (typeof Object.getOwnPropertyDescriptor(Assertion.prototype, name).value) === 'function' || isChainableMethod(name);
+  };
 
   return Object.getOwnPropertyNames(Assertion.prototype)
     .filter(function(name) { return name !== 'arguments' })
