@@ -6,6 +6,10 @@ Hereafter lets you write concise, high-level, functional tests that provide simi
 
 At the momement, Hereafter works with **Mocha**, **Chai** and **Jest**. Jasmine support will come shortly.
 
+## Getting Started
+
+Install hereafter with `npm install --save-dev hereafter` and check out the **[API Documentation](https://github.com/mlawrie/hereafter/blob/master/doc/api_documentation.md)** to see how get started with your testing framework of choice.
+
 ## An example
 
 ```javascript
