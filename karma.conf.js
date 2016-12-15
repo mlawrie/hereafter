@@ -9,6 +9,9 @@ module.exports = function(config) {
 
     preprocessors: {
       'spec/*.spec.js': ['browserify']
-    }
+    },
+    plugins: [
+      'karma-browserify'
+    ]
   });
 };

@@ -45,10 +45,8 @@ Hereafter sidesteps this problem entirely by making these tests look and work li
 
 
 ## Todo
-- Improve Scheduler to work on all platforms
 - Figure out how many poll attempts
 - Implement (much) longer polling for non-mocked endpoints
 - Jasmine support
 - Jest support
 - Test scheduler and exception handling on browsers
-- ES5 support?
