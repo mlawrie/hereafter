@@ -20,7 +20,7 @@ var makeLink = function(terms, chain, lastLinkRecord) {
       return makeLink(terms, chain, thisLinkRecord);
     };
 
-    Object.defineProperty(instance, term.name, {get: get});
+    Object.defineProperty(instance, term.name, {get: get, configurable: true});
   });
 
   return instance;
