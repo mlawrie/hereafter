@@ -16,6 +16,11 @@ const extractChainableTermsFromChai = (chai) => {
     .map(name => ({name, isChainable: isChainableMethod(name)}));
 };
 
+const extractChainableTermsFromJest = (expect) => {
+  return Object.getOwnPropertyNames(expect(1))
+    .map(name => ({name, isChainable: name === 'not'}));
+}
+
 const hereafter = (testBodyFn) => {
   const capturers = [];
   const originalStack = new Error().stack;
@@ -61,9 +66,14 @@ const hereafter = (testBodyFn) => {
   };
 };
 
-hereafter.useChaiExpect = (chai, utils) => {
+hereafter.useChaiExpect = (chai) => {
   expectImpl = chai.expect;
   chaiChainableTerms = extractChainableTermsFromChai(chai);
+};
+
+hereafter.useJestExpect = (expect) => {
+  expectImpl = expect;
+  chaiChainableTerms = extractChainableTermsFromJest(expect);
 };
 
 

@@ -4,7 +4,7 @@
 
 Hereafter lets you write concise, high-level, functional tests that provide similar coverage to your Selenium/Webdriver/Nightwatch/etc tests but execute hundreds or even thousands of times faster.
 
-At the momement, this only works with Mocha and Chai but Jest and Jasmine support will come shortly.
+At the momement, Hereafter works with *Mocha*, *Chai* and *Jest*. Jasmine support will come shortly.
 
 ## An example
 
@@ -43,10 +43,9 @@ A suite of high-level behavioral tests that execute quickly is extremely valuabl
 
 Hereafter sidesteps this problem entirely by making these tests look and work like regular low-level tests.
 
-
 ## Todo
 - Figure out how many poll attempts
 - Implement (much) longer polling for non-mocked endpoints
 - Jasmine support
-- Jest support
+- React native example
 - Test scheduler and exception handling on browsers
