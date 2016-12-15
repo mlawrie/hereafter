@@ -21,7 +21,7 @@ const fetchMock = require('fetch-mock');
 
 hereafter.useChaiExpect(chai);
 
-it('should be easy to write fast behavioral tests', hereafter(expect, when) => {
+it('should be easy to write fast behavioral tests', hereafter((expect, when) => {
   fetchMock.get('/login', {username: 'SallySmith'});
   fetchMock.get('/myAccount', {points: 150});
   const app = mount(<MyCoolApp/>);
@@ -31,7 +31,7 @@ it('should be easy to write fast behavioral tests', hereafter(expect, when) => {
 
   when(() => { app.find('.my-account').simulate('click') });  
   expect(() => app.text()).to.contain('My Account: You have 150 points!');
-});
+}));
 
 ```
 
