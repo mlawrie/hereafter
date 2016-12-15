@@ -33,7 +33,15 @@ var hereafter = function(testBodyFn) {
   
   var expect = function(func) {
     if (typeof func !== 'function') {
-      throw buildMoreInformativeError(new Error("Something other than a function passed into expect(): " + func), originalStack);
+      var errorToThrow;
+      
+      try {
+        throw new Error("Something other than a function passed into expect(): " + func)
+      } catch (e) {
+        errorToThrow = e;
+      }
+
+      throw buildMoreInformativeError(errorToThrow, originalStack);
     }
 
     var capturer = expectationEvaluator(func, captureExpectation(expectationChainTerms), expectImpl);

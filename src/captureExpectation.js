@@ -9,7 +9,11 @@ var makeLink = function(terms, chain, lastLinkRecord) {
       var thisLinkRecord = {term: term.name};
 
       if (!term.isChainable) {
-        thisLinkRecord.stack = new Error().stack;
+        try {
+          throw new Error();
+        } catch (e) {
+          thisLinkRecord.stack = e.stack;
+        }
       }
 
       chain.push(thisLinkRecord);
