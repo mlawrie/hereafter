@@ -18,14 +18,6 @@ describe('async expectations', () => {
     })();
   });
 
-  it('should accept to contain expectation', () => {
-    return hereafter((expect, when) => {
-      
-      expect(() => [1,2]).to.contain(1);
-      expect(() => ({ foo: 1, bar: 2 })).to.contain.any.keys('bar', 'baz');
-    })();
-  });
-
   it('should not evaluate second expectation until first succeeds', () => {
     const stub1 = sinon.stub().returns(false);
     const stub2 = sinon.stub().returns(false);
