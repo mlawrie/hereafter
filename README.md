@@ -4,7 +4,7 @@
 
 Hereafter lets you write concise, high-level, functional tests that provide similar coverage to your Selenium/Webdriver/Nightwatch/etc tests but execute hundreds or even thousands of times faster.
 
-At the momement, Hereafter works with *Mocha*, *Chai* and *Jest*. Jasmine support will come shortly.
+At the momement, Hereafter works with **Mocha**, **Chai** and **Jest**. Jasmine support will come shortly.
 
 ## An example
 
