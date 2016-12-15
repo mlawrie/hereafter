@@ -21,7 +21,11 @@ var makeLink = function(terms, chain, lastLinkRecord, isFunction) {
       return makeLink(terms, chain, thisLinkRecord, term.isFunction);
     };
     
-    Object.defineProperty(instance, term.name, {get: get});
+    try {
+      Object.defineProperty(instance, term.name, {get: get});
+    } catch(e) {
+      //Do nothing. This will fail for certain things in PhantomJS that we do not care about
+    }
   });
 
   return instance;

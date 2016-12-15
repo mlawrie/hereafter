@@ -22,6 +22,7 @@ describe('async expectations', () => {
     return hereafter((expect, when) => {
       
       expect(() => [1,2]).to.contain(1);
+      expect(() => ({ foo: 1, bar: 2 })).to.contain.any.keys('bar', 'baz');
     })();
   });
 
