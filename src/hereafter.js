@@ -1,4 +1,5 @@
 'use strict';
+
 const scheduler = require('./scheduler');
 const captureExpectation = require('./captureExpectation');
 const expectationEvaluator = require('./expectationEvaluator');

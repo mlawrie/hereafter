@@ -11,9 +11,9 @@ describe('async expectations', (realDone) => {
       
       expect(() => array).to.have.lengthOf(3);
 
-      process.nextTick(() => {
+      setTimeout(() => {
         array.push(3);
-      });
+      }, 0);
       
     })();
   });
@@ -28,11 +28,11 @@ describe('async expectations', (realDone) => {
       expect(() => 'cats').to.satisfy(stub1);
       expect(() => 'hats').to.satisfy(stub2);
 
-      process.nextTick(() => {
+      setTimeout(() => {
         stub1.returns(true);
         stub2.returns(true);
         stub2WasCalledBeforeNextTick = stub2.called;
-      });
+      }, 0);
       
     })().then(() => {
       realExpect(stub2WasCalledBeforeNextTick).to.be.false;

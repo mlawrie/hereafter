@@ -1,3 +1,4 @@
+'use strict';
 const makeLink = (terms, chain, lastLinkRecord) => {
   const instance = (...invokedArgs) => {
     lastLinkRecord.invokedWith = invokedArgs;

@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = () => new Promise(resolve => process.nextTick(resolve));
+module.exports = (cb) => new Promise(resolve => setTimeout(resolve, 0));
