@@ -23,7 +23,13 @@ var extractChainableTermsFromJest = function(expect) {
 
 var hereafter = function(testBodyFn) {
   var capturers = [];
-  var originalStack = new Error().stack;
+  var originalStack;
+  
+  try {
+    throw new Error();
+  } catch(e) {
+    originalStack = e.stack;
+  }
   
   var expect = function(func) {
     if (typeof func !== 'function') {
