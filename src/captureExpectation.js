@@ -1,7 +1,7 @@
 'use strict';
 var makeLink = function(terms, chain, lastLinkRecord) {
-  var instance = function(...invokedArgs) {
-    lastLinkRecord.invokedWith = invokedArgs;
+  var instance = function() {
+    lastLinkRecord.invokedWith = Array.prototype.slice.call(arguments);
   };
 
   terms.forEach(function(term) {
@@ -25,7 +25,7 @@ var makeLink = function(terms, chain, lastLinkRecord) {
 module.exports = function(terms) {
   var chain = [];
   var instance = {};
-  instance.getChain = function() { return chain };
+  instance.getChain = function() { return chain; };
   instance.returnValue = makeLink(terms, chain, {});
   return instance;
 };

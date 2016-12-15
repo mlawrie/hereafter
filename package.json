@@ -7,7 +7,8 @@
     "nodeTest": "./node_modules/mocha/bin/mocha ./spec/*.spec.js",
     "karmaTest": "./node_modules/karma/bin/karma start --single-run",
     "jestIntegrationTest": "./node_modules/jest/bin/jest.js spec/jestTest.test.js 2>&1 | grep --quiet \"1 failed, 1 passed, 2 total\"",
-    "test": "set -e; npm run nodeTest; npm run karmaTest; npm run jestIntegrationTest"
+    "jshint": "./node_modules/jshint/bin/jshint src/*.js",
+    "test": "set -e; npm run nodeTest; npm run karmaTest; npm run jestIntegrationTest; npm run jshint"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "jest": "^17.0.3",
+    "jshint": "^2.9.4",
     "karma": "^1.3.0",
     "karma-browserify": "^5.1.0",
     "karma-firefox-launcher": "^1.0.0",
@@ -38,5 +40,8 @@
   },
   "peerDependencies": {
     "chai": ">= 2.1.2 < 4"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6"
   }
 }

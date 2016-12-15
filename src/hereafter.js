@@ -1,9 +1,9 @@
 'use strict';
 
-var scheduler = require('./scheduler');
 var captureExpectation = require('./captureExpectation');
 var expectationEvaluator = require('./expectationEvaluator');
 var buildMoreInformativeError = require('./buildMoreInformativeError');
+var Promise = require('bluebird');
 
 var expectImpl;
 var expectationChainTerms = [];
@@ -27,7 +27,7 @@ var hereafter = function(testBodyFn) {
   
   var expect = function(func) {
     if (typeof func !== 'function') {
-      throw buildMoreInformativeError(new Error(`Something other than a function passed into expect(): ${func}`), originalStack);
+      throw buildMoreInformativeError(new Error("Something other than a function passed into expect(): " + func), originalStack);
     }
 
     var capturer = expectationEvaluator(func, captureExpectation(expectationChainTerms), expectImpl);

@@ -2,6 +2,7 @@
 
 var scheduler = require('./scheduler');
 var buildMoreInformativeError = require('./buildMoreInformativeError');
+var Promise = require('bluebird');
 
 var expectationEvaluator = function(getComparator, chainCapturer, wrappedExpectImpl) {
   var evaluator = {};
@@ -9,14 +10,14 @@ var expectationEvaluator = function(getComparator, chainCapturer, wrappedExpectI
 
   evaluator.returnValue = chainCapturer;
   
-  evaluator.getInfo = function() { return {type: 'expect', getComparator, chain: chainCapturer.getChain()} };
+  evaluator.getInfo = function() { return {type: 'expect', getComparator: getComparator, chain: chainCapturer.getChain()} };
   
   var evaluateOnce = function() {
     var partialExpectation = wrappedExpectImpl(getComparator());
     chainCapturer.getChain().forEach(function(link) {
       try {
         if (link.invokedWith) {
-          partialExpectation = partialExpectation[link.term](...link.invokedWith);
+          partialExpectation = partialExpectation[link.term].apply(partialExpectation, link.invokedWith);
         } else {
           partialExpectation = partialExpectation[link.term];
         }  
