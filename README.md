@@ -4,7 +4,7 @@
 
 Hereafter lets you write concise, high-level, functional tests that provide similar coverage to your Selenium/Webdriver/Nightwatch/etc tests but execute hundreds or even thousands of times faster.
 
-At the momement, Hereafter works with **Mocha**, **Chai** and **Jest**. Jasmine support will come shortly.
+At the momement, Hereafter works with **Mocha**, **Chai** and **Jest**. I'm planning to add Jasime support, as well.
 
 ## Getting Started
 
@@ -49,12 +49,14 @@ Hereafter sidesteps this problem entirely by making these tests look and work li
 
 ## Todo
 
-There are still some things let to do! This is really just notes for me right now.
+There are still some things left to do! This is really just notes for me right now.
 
-- Allow configuration of number of poll attempts
-- Improve test coverage of stacktract handling
-- Implement (much) longer polling for non-mocked endpoints
+- Improve test coverage of stacktrace handling
 - Jasmine support
 - React native example
-- Test scheduler and exception handling on browsers
+- Improve performance of scheduler
 - Typings
+- Add note about chai length/lengthOf to docs
+- Get karma runner using phantomjs with sourcemaps for more accurate testing of realistic behavior
+- Implement (much) longer polling for non-mocked endpoints?
+- Allow configuration of number of poll attempts?

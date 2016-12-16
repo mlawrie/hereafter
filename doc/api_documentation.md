@@ -156,4 +156,4 @@ At this time, Chai is the only expectation library supported for Mocha.
 
 ## Working with Jasmine
 
-Hereafter doesn't support Jasmine yet! It will soon!
+Hereafter doesn't support Jasmine yet!

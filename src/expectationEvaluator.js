@@ -27,7 +27,7 @@ var expectationEvaluator = function(getComparator, chainCapturer, wrappedExpectI
           partialExpectation = partialExpectation[link.term];
         }  
       } catch (e) {
-        throw buildMoreInformativeError(e, evaluator.stack);
+        throw buildMoreInformativeError(e, link.stack);
       }
     });
   };

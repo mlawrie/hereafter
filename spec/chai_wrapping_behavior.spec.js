@@ -37,6 +37,8 @@ describe('chai wrapping behavior', () => {
   }));
 
   xit('should asynchronously handle chai increase/decrease/change', hereafter((expect, when) => {
+    //TODO: Tests need to be written; this probably works
+
     //change
 
     var obj = { val: 10 };
@@ -59,6 +61,9 @@ describe('chai wrapping behavior', () => {
   }));
 
   xit('should support chai chainable functions', hereafter((expect, when) => {
+
+    // TODO: Add support
+    
     expect(() => ({ foo: 'baz' })).to.have.property('foo').and.not.equal('bar');
     expect(() => obj).to.have.property('foo').that.is.a('string');
     expect(() => deepObj).to.have.property('green').that.is.an('object').that.deep.equals({ tea: 'matcha' });
