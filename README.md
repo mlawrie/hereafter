@@ -46,18 +46,3 @@ Behind the scenes, Hereafter implements a similar polling scheme for expectation
 A suite of high-level behavioral tests that execute quickly is extremely valuable. It makes it easy and safe to refactor your code and help you safely deliver changes to production. The problem is that these tests aren't very easy to write or maintain. Relatively deep understanding of asynchronous javascript can be necessary to write useful tests at this level and that discourages many teams.
 
 Hereafter sidesteps this problem entirely by making these tests look and work like regular low-level tests.
-
-## Todo
-
-There are still some things left to do! This is really just notes for me right now.
-
-- Improve test coverage of stacktrace handling
-- Jasmine support
-- React native example
-- Improve performance of scheduler
-- Typings
-- Add note about chai length/lengthOf to docs
-- Get karma runner using phantomjs with sourcemaps for more accurate testing of realistic behavior
-- Support chai's chainable functions
-- Implement (much) longer polling for non-mocked endpoints?
-- Allow configuration of number of poll attempts?
