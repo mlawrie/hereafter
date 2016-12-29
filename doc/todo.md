@@ -2,13 +2,17 @@
 
 There are still some things left to do! This is really just notes for me right now.
 
-- Improve test coverage of stacktrace handling
+- Fix pending tests
 - Jasmine support
-- React native example
-- Improve performance of scheduler
-- Typings
-- Add note about chai length/lengthOf to docs
 - Get karma runner using phantomjs with sourcemaps for more accurate testing of realistic behavior
+- React native example
+- Typings
 - Support chai's chainable functions
-- Implement (much) longer polling for non-mocked endpoints?
 - Allow configuration of number of poll attempts?
+
+
+## Maybe:
+- Implement (much) longer polling for non-mocked endpoints?
+- Add note about chai length/lengthOf to docs
+- Improve test coverage of stacktrace handling
+- Improve performance of scheduler
