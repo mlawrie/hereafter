@@ -11,6 +11,7 @@ At the momement, Hereafter works with **Mocha**, **Chai** and **Jest**. I'll add
 Install hereafter with `npm install --save-dev hereafter` and check out the **[API Documentation](https://github.com/mlawrie/hereafter/blob/master/doc/api_documentation.md)** to see how get started with your testing framework of choice.
 
 ## An example
+This example demonstrates a react-like application, but hereafter is totally agnostic to what you use to build your app.
 
 ```javascript
 
