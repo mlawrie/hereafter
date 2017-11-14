@@ -94,5 +94,4 @@ hereafter.useJestExpect = function(expect) {
   expectationChainTerms = extractChainableTermsFromJest(expect);
 };
 
-
 module.exports = hereafter;

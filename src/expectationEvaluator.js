@@ -11,7 +11,7 @@ var expectationEvaluator = function(getComparator, chainCapturer, wrappedExpectI
 
 
   var evaluator = {};
-  var attemptsLeft = 20;
+  var schedulerInstance = scheduler();
 
   evaluator.returnValue = chainCapturer;
   
@@ -33,13 +33,13 @@ var expectationEvaluator = function(getComparator, chainCapturer, wrappedExpectI
   };
 
   evaluator.evaluate = function() {
+    
     return new Promise(function(resolve) {
       evaluateOnce();
       resolve();
     }).catch(function(e) {
-      if (attemptsLeft > 0) {
-        attemptsLeft -= 1;
-        return scheduler().then(evaluator.evaluate);
+      if (schedulerInstance.hasAttemptsLeft()) {
+        return schedulerInstance.tryAgain().then(evaluator.evaluate);
       } else {
         throw e;
       }
