@@ -5,15 +5,18 @@ var Promise = require('bluebird');
 module.exports = function(timeoutMillis) {
   var startTime = (new Date()).getTime();
   
-  var hasAttemptsLeft = function() {
+  var shouldTryAgain = function() {
       return (new Date()).getTime() <= startTime + timeoutMillis;
   };
 
   var tryAgain = function() {
     return new Promise(function(resolve) {
-      setTimeout(resolve, 0);
+      var waitTime = (1 + (new Date()).getTime() - startTime) / 25;
+      waitTime = waitTime > 50 ? 50 : waitTime;
+      
+      setTimeout(resolve, Math.ceil(waitTime));
     });
   };
 
-  return {hasAttemptsLeft: hasAttemptsLeft, tryAgain: tryAgain};
+  return {shouldTryAgain: shouldTryAgain, tryAgain: tryAgain};
 };
