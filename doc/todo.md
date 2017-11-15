@@ -8,8 +8,6 @@ There are still some things left to do! This is really just notes for me right n
 - React native example
 - Typings
 - Support chai's chainable functions
-- Allow configuration of number of poll attempts?
-- Figure out if the network call tracking is robust
 - Implement network call tracking with fetch api (and xmlhttprequest?)
 
 ## Maybe:
