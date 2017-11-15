@@ -101,6 +101,9 @@ hereafter.setTimeoutMillis = function(millis) {
 };
 
 hereafter.setWaitForNetworkCalls = function(environment) {
+  if (environment === 'nodejs') {
+    require('./nodeInterceptor');
+  }
   networkCallMonitoringStrategy = environment;
 }
 
