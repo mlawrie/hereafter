@@ -99,6 +99,22 @@ describe('async expectations', () => {
       realExpect(stub2.called).to.be.false;
     });
   });
+
+  it('should fail if timeout exceeded', () => {
+    hereafter.setTimeoutMillis(50);
+
+    let val = false;
+
+    setTimeout(() => val = true, 70);
+
+    return hereafter((expect, when) => {
+      expect(() => val).to.be.true;
+    })().then(() => {
+      throw new Error('this should not be called');
+    }).catch(e => {
+      realExpect(e.message).to.eql('expected false to be true');  
+    });
+  });
   
 });
 

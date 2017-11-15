@@ -3,15 +3,13 @@
 var Promise = require('bluebird');
 
 module.exports = function(timeoutMillis) {
-  var attemptsLeft = 20;
-
-  console.log(timeoutMillis);
+  var startTime = (new Date()).getTime();
+  
   var hasAttemptsLeft = function() {
-      return attemptsLeft > 0;
+      return (new Date()).getTime() <= startTime + timeoutMillis;
   };
 
   var tryAgain = function() {
-    attemptsLeft =- 1;
     return new Promise(function(resolve) {
       setTimeout(resolve, 0);
     });
