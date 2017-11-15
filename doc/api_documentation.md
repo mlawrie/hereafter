@@ -34,7 +34,7 @@ hereafter.useJestExpect(expect);
 
 ---
 
-### hereafter.setTimeoutMillis(*milllis*)
+### hereafter.setTimeoutMillis(*millis*)
 
 Sets number of milliseconds hereafter should wait before giving up. Defaults to 500.
 ```javascript
