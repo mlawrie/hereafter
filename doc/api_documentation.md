@@ -4,6 +4,7 @@
 - [Methods provided by Hereafter](#methods-provided-by-hereafter)
   - [hereafter.useChaiExpect(*chai*)](#hereafterusechaiexpectchai)
   - [hereafter.useJestExpect(*expect*)](#hereafterusejestexpectexpect)
+  - [hereafter.setTimeoutMillis(*millis*)](#hereaftersettimeoutmillismillis)
   - [hereafter(*function*)](#hereafterfunction)
   - [expect(*function*)](#expectfunction)
   - [when(*function*)](#whenfunction)
@@ -29,6 +30,16 @@ Configures hereafter to use Jest expectations.
 ```javascript
 const hereafter = require('hereafter');
 hereafter.useJestExpect(expect);
+```
+
+---
+
+### hereafter.setTimeoutMillis(*milllis*)
+
+Sets number of milliseconds hereafter should wait before giving up. Defaults to 500.
+```javascript
+const hereafter = require('hereafter');
+hereafter.setTimeoutMillis(250);
 ```
 
 ---
