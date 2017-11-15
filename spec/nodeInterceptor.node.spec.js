@@ -68,18 +68,20 @@ describe('nodeInterceptor', () => {
     }); 
   });
 
-  xit('works with node-fetch', () => {
+  it('works with node-fetch', () => {
     const fetch = require('node-fetch');
     const promise = fetch('http://nodejs.org/dist/index.json');
 
     realExpect(nodeInterceptor.getOutstandingRequestCount()).to.eql(1);
 
-    return promise.then(() => {
+    return promise
+    .then(b => b.json())
+    .then(() => {
       realExpect(nodeInterceptor.getOutstandingRequestCount()).to.eql(0);
     });
   });
 
-  describe('axios', () => {
+  describe('works with axios', () => {
     it('restores count after axios request completes', (done) => {
       const axios = require('axios');
       const requestPromise = axios.get('http://nodejs.org/dist/index.json').then((b) => {
