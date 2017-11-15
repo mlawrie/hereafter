@@ -8,15 +8,15 @@
     "eqeqeq"        : true,     // true: Require triple equals (===) for comparison
     "forin"         : true,     // true: Require filtering for..in loops with obj.hasOwnProperty()
     "freeze"        : true,     // true: prohibits overwriting prototypes of native objects such as Array, Date etc.
-    "immed"         : false,    // true: Require immediate invocations to be wrapped in parens e.g. `(function () { } ());`
-    "latedef"       : false,    // true: Require variables/functions to be defined before being used
-    "newcap"        : false,    // true: Require capitalization of all constructor functions e.g. `new F()`
+    "immed"         : true,    // true: Require immediate invocations to be wrapped in parens e.g. `(function () { } ());`
+    "latedef"       : true,    // true: Require variables/functions to be defined before being used
+    "newcap"        : true,    // true: Require capitalization of all constructor functions e.g. `new F()`
     "noarg"         : true,     // true: Prohibit use of `arguments.caller` and `arguments.callee`
     "noempty"       : true,     // true: Prohibit use of empty blocks
     "nonbsp"        : true,     // true: Prohibit "non-breaking whitespace" characters.
-    "nonew"         : false,    // true: Prohibit use of constructors for side-effects (without assignment)
-    "plusplus"      : false,    // true: Prohibit use of `++` and `--`
-    "quotmark"      : false,    // Quotation mark consistency:
+    "nonew"         : true,    // true: Prohibit use of constructors for side-effects (without assignment)
+    "plusplus"      : true,    // true: Prohibit use of `++` and `--`
+    "quotmark"      : "single",    // Quotation mark consistency:
                                 //   false    : do nothing (default)
                                 //   true     : ensure whatever is used is consistent
                                 //   "single" : require single quotes
@@ -26,11 +26,11 @@
                                 //   true     : all variables, last function parameter
                                 //   "vars"   : all variables only
                                 //   "strict" : all variables, all function parameters
-    "strict"        : false,     // true: Requires all functions run in ES5 Strict Mode
-    "maxparams"     : false,    // {int} Max number of formal params allowed per function
-    "maxdepth"      : false,    // {int} Max depth of nested blocks (within functions)
-    "maxstatements" : false,    // {int} Max number statements per function
-    "maxcomplexity" : false,    // {int} Max cyclomatic complexity per function
+    "strict"        : false,    // true: Requires all functions run in ES5 Strict Mode
+    "maxparams"     : 5,        // {int} Max number of formal params allowed per function
+    "maxdepth"      : 3,        // {int} Max depth of nested blocks (within functions)
+    "maxstatements" : 10,       // {int} Max number statements per function
+    "maxcomplexity" : 3,        // {int} Max cyclomatic complexity per function
     "maxlen"        : false,    // {int} Max number of characters per line
     "varstmt"       : false,    // true: Disallow any var statements. Only `let` and `const` are allowed.
 

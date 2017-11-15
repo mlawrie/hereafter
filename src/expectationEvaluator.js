@@ -41,7 +41,7 @@ var expectationEvaluator = function(getComparator, chainCapturer, wrappedExpectI
       if (schedulerInstance.shouldTryAgain()) {
         return schedulerInstance.tryAgain().then(evaluator.evaluate);
       } else {
-        console.error("*** Hereafter timeout of " + timeoutMillis + "ms exceeded! ***");
+        console.error('*** Hereafter timeout of ' + timeoutMillis + 'ms exceeded! ***');
         throw e;
       }
     });

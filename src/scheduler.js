@@ -27,7 +27,7 @@ module.exports = function(timeoutMillis, networkCallMonitoringStrategy) {
     if (outstandingRequestCount > 0) {
       if (currentTime() >= timeUntilNextMessageAboutOutstandingRequests) {
         timeUntilNextMessageAboutOutstandingRequests = nextMessageTime();
-        console.log("Hereafter is still waiting on " + outstandingRequestCount + " network calls...");
+        console.log('Hereafter is still waiting on ' + outstandingRequestCount + ' network calls...');
       }
       timeUntilWeGiveUp = currentTime() + timeoutMillis;
       return true;

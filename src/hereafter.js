@@ -42,7 +42,7 @@ var hereafter = function(testBodyFn) {
       var errorToThrow;
       
       try {
-        throw new Error("Something other than a function passed into expect(): " + func)
+        throw new Error('Something other than a function passed into expect(): ' + func)
       } catch (e) {
         errorToThrow = e;
       }
