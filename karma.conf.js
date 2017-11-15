@@ -7,6 +7,10 @@ module.exports = function(config) {
       'spec/*.spec.js'
     ],
 
+    exclude: [
+      'spec/*.node.spec.js'
+    ],
+
     preprocessors: {
       'spec/*.spec.js': ['browserify']
     },

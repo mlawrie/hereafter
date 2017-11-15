@@ -1,10 +1,5 @@
 'use strict';
 
-if (typeof window !== 'undefined') {
-  // Not node, don't run tests
-  return;
-}
-
 const {realExpect, hereafter, captureError} = require('./util');
 const nodeInterceptor = require('../src/nodeInterceptor');
 const http = require('http');

@@ -2,11 +2,30 @@
 
 var Promise = require('bluebird');
 
-module.exports = function(timeoutMillis) {
-  var startTime = (new Date()).getTime();
-  
+var currentTime = function() {
+  return (new Date()).getTime();
+};
+
+var nextMessageTime = function() {
+  return currentTime() + 3000;
+}
+
+module.exports = function(timeoutMillis, waitForNetworkCalls) {
+  var startTime = currentTime();
+  var timeUntilWeGiveUp = currentTime() + timeoutMillis;
+  var timeUntilNextMessageAboutOutstandingRequests = nextMessageTime();
+
   var shouldTryAgain = function() {
-      return (new Date()).getTime() <= startTime + timeoutMillis;
+    var outstandingRequestCount = waitForNetworkCalls ? require('./nodeInterceptor').getOutstandingRequestCount() : 0;
+    if (outstandingRequestCount > 0) {
+      if (currentTime() >= timeUntilNextMessageAboutOutstandingRequests) {
+        timeUntilNextMessageAboutOutstandingRequests = nextMessageTime();
+        console.log("Hereafter is still waiting on " + outstandingRequestCount + " network calls...");
+      }
+      timeUntilWeGiveUp = currentTime() + timeoutMillis;
+      return true;
+    }
+    return currentTime() <= timeUntilWeGiveUp;
   };
 
   var tryAgain = function() {

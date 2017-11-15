@@ -13,6 +13,7 @@ const captureError = (hereafterTest, done) => {
 
 beforeEach(() => {
   hereafter.setTimeoutMillis(50);
+  hereafter.setWaitForNetworkCalls(false);
 });
 
 module.exports = {

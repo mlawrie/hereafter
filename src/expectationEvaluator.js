@@ -4,14 +4,14 @@ var scheduler = require('./scheduler');
 var buildMoreInformativeError = require('./buildMoreInformativeError');
 var Promise = require('bluebird');
 
-var expectationEvaluator = function(getComparator, chainCapturer, wrappedExpectImpl, timeoutMillis) {
+var expectationEvaluator = function(getComparator, chainCapturer, wrappedExpectImpl, timeoutMillis, waitForNetworkCalls) {
   if (typeof wrappedExpectImpl === 'undefined') {
     throw new Error('No expect implementation set for Hereafter. You need to run hereafter.useChaiExpect or hereafter.useJestExpect before running tests');
   }
 
 
   var evaluator = {};
-  var schedulerInstance = scheduler(timeoutMillis);
+  var schedulerInstance = scheduler(timeoutMillis, waitForNetworkCalls);
 
   evaluator.returnValue = chainCapturer;
   
