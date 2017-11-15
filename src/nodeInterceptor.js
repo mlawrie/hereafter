@@ -8,19 +8,28 @@ var getRequestId = function() {
 
 var monkeyPatchImpl = function(original, protocol) {
   return function(options, callback){
+    
     var requestId = getRequestId();
     outstandingRequests.push(requestId);
-
+    
     var markComplete = function() {
       if (outstandingRequests.indexOf(requestId) !== -1) {
         outstandingRequests.splice(outstandingRequests.indexOf(requestId), 1);
       }
     };
     
-    return original.call(protocol, options, function(res) {
-      res.on('end', markComplete);
-      callback(res);
-    }).on('error', markComplete);
+    try {
+      return original.call(protocol, options, function(res) {
+        res.on('end', markComplete);
+        if (typeof callback === 'function') {
+          callback(res);
+        }
+      }).on('error', markComplete)
+        .on('abort', markComplete);
+    } catch (e) {
+      markComplete();
+      throw e;
+    }
   };
 };
 
