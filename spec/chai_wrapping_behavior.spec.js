@@ -77,16 +77,21 @@ describe('chai wrapping behavior', () => {
 
   }));
 
+  it('should support to.have.deep.property', hereafter((expect, when) => {
+    
+  }));
+
   it("should accept all of the chai assertions from chai's own docs excluding change/increase/decrease and chainable functions", hereafter((expect, when) => {
     //not
     expect(() => 'foo').to.not.equal('bar');
     expect(() => () => {}).to.not.throw(Error);
     
     //deep
+    expect(() => ({x: {a: 1}})).to.have.deep.property('x', {a: 1});
+    expect(() => ({x: {a: 1}})).to.not.have.property('x', {a: 1});
+
     expect(() => ({ bar: 'baz' })).to.deep.equal({ bar: 'baz' });
-    expect(() => ({ foo: { bar: { baz: 'quux' } } })).to.have.deep.property('foo.bar.baz', 'quux');
-    var deepCss = { '.link': { '[target]': 42 }};
-    expect(() => deepCss).to.have.deep.property('\\.link.\\[target\\]', 42);
+    
 
     //any
     expect(() => ({bar: 'bar'})).to.have.any.keys('bar', 'baz');
@@ -128,8 +133,8 @@ describe('chai wrapping behavior', () => {
     // undefined
     expect(() => undefined).to.be.undefined;
 
-    // NaN
-    expect(() => 'foo').to.be.NaN;
+    // finite
+    expect(() => 1).to.be.finite;
 
     //exist
     expect(() => 'foo').to.exist;
@@ -188,30 +193,8 @@ describe('chai wrapping behavior', () => {
     expect(() => obj).to.have.property('foo');
     expect(() => obj).to.have.property('foo', 'bar');
 
-    var deepObj = {
-        green: { tea: 'matcha' }
-      , teas: [ 'chai', 'matcha', { tea: 'konacha' } ]
-    };
-
-    expect(() => deepObj).to.have.deep.property('green.tea', 'matcha');
-    expect(() => deepObj).to.have.deep.property('teas[1]', 'matcha');
-    expect(() => deepObj).to.have.deep.property('teas[2].tea', 'konacha');
-
-    var arr = [
-        [ 'chai', 'matcha', 'konacha' ]
-      , [ { tea: 'chai' }
-        , { tea: 'matcha' }
-        , { tea: 'konacha' } ]
-    ];
-
-    expect(() => arr).to.have.deep.property('[0][1]', 'matcha');
-    expect(() => arr).to.have.deep.property('[1][2].tea', 'konacha');
-
     var css = { '.link[target]': 42 };
     expect(() => css).to.have.property('.link[target]', 42);
-
-    var deepCss = { '.link': { '[target]': 42 }};
-    expect(() => deepCss).to.have.deep.property('\\.link.\\[target\\]', 42);
     
     //ownProperty
 

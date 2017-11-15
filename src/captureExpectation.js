@@ -7,15 +7,13 @@ var makeLink = function(terms, chain, lastLinkRecord, isFunction) {
   terms.forEach(function(term) {
     var get = function() {
       var thisLinkRecord = {term: term.name};
-
-      if (!term.isChainable) {
-        try {
-          throw new Error();
-        } catch (e) {
-          thisLinkRecord.stack = e.stack;
-        }
+  
+      try {
+        throw new Error();
+      } catch (e) {
+        thisLinkRecord.stack = e.stack;
       }
-
+    
       chain.push(thisLinkRecord);
       
       return makeLink(terms, chain, thisLinkRecord, term.isFunction);
