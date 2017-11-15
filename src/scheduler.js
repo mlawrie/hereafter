@@ -10,13 +10,20 @@ var nextMessageTime = function() {
   return currentTime() + 3000;
 }
 
-module.exports = function(timeoutMillis, waitForNetworkCalls) {
+var getOutstandingRequestCount = function(networkCallMonitoringStrategy) {
+  if (networkCallMonitoringStrategy === 'nodejs') {
+    return require('./nodeInterceptor').getOutstandingRequestCount();
+  }
+  return 0;
+};
+
+module.exports = function(timeoutMillis, networkCallMonitoringStrategy) {
   var startTime = currentTime();
   var timeUntilWeGiveUp = currentTime() + timeoutMillis;
   var timeUntilNextMessageAboutOutstandingRequests = nextMessageTime();
 
   var shouldTryAgain = function() {
-    var outstandingRequestCount = waitForNetworkCalls ? require('./nodeInterceptor').getOutstandingRequestCount() : 0;
+    var outstandingRequestCount = getOutstandingRequestCount(networkCallMonitoringStrategy);
     if (outstandingRequestCount > 0) {
       if (currentTime() >= timeUntilNextMessageAboutOutstandingRequests) {
         timeUntilNextMessageAboutOutstandingRequests = nextMessageTime();

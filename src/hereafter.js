@@ -8,7 +8,7 @@ var Promise = require('bluebird');
 var expectImpl;
 var expectationChainTerms = [];
 var timeoutMillis = 500;
-var waitForNetworkCalls = false;
+var networkCallMonitoringStrategy = false;
 
 var extractChainableTermsFromChai = function(chai) {
   var Assertion = chai.Assertion;
@@ -50,7 +50,7 @@ var hereafter = function(testBodyFn) {
       throw buildMoreInformativeError(errorToThrow, originalStack);
     }
 
-    var capturer = expectationEvaluator(func, captureExpectation(expectationChainTerms), expectImpl, timeoutMillis, waitForNetworkCalls);
+    var capturer = expectationEvaluator(func, captureExpectation(expectationChainTerms), expectImpl, timeoutMillis, networkCallMonitoringStrategy);
     capturer.stack = originalStack;
     capturers.push(capturer);
     return capturer.returnValue.returnValue;
@@ -100,8 +100,8 @@ hereafter.setTimeoutMillis = function(millis) {
   timeoutMillis = millis;
 };
 
-hereafter.setWaitForNetworkCalls = function(trueOrFalse) {
-  waitForNetworkCalls = trueOrFalse;
+hereafter.setWaitForNetworkCalls = function(environment) {
+  networkCallMonitoringStrategy = environment;
 }
 
 module.exports = hereafter;

@@ -4,10 +4,12 @@ const {realExpect, hereafter, captureError} = require('./util');
 const http = require('http');
 
 describe('async expectations', () => {
-  it('should not fail if timeout exceeded but network calls are pending', () => {
-    hereafter.setWaitForNetworkCalls(true);
-    hereafter.setTimeoutMillis(0);
+  beforeEach(() => {
+    hereafter.setWaitForNetworkCalls('nodejs');
+  }); 
 
+  it('should not fail if timeout exceeded but network calls are pending', () => {
+    hereafter.setTimeoutMillis(0);
     let val = false;
 
     http.get('http://nodejs.org/dist/index.json', (res) => {
@@ -26,7 +28,6 @@ describe('async expectations', () => {
   });
 
   it('should reset timer after network call completes', () => {
-    hereafter.setWaitForNetworkCalls(true);
     hereafter.setTimeoutMillis(50);
 
     let val = false;
