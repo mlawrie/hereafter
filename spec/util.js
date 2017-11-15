@@ -11,6 +11,10 @@ const captureError = (hereafterTest, done) => {
   }
 };
 
+beforeEach(() => {
+  hereafter.setTimeoutMillis(250);
+});
+
 module.exports = {
   realExpect: chai.expect,
   hereafter,

@@ -7,6 +7,7 @@ var Promise = require('bluebird');
 
 var expectImpl;
 var expectationChainTerms = [];
+var timeoutMillis = 500;
 
 var extractChainableTermsFromChai = function(chai) {
   var Assertion = chai.Assertion;
@@ -48,7 +49,7 @@ var hereafter = function(testBodyFn) {
       throw buildMoreInformativeError(errorToThrow, originalStack);
     }
 
-    var capturer = expectationEvaluator(func, captureExpectation(expectationChainTerms), expectImpl);
+    var capturer = expectationEvaluator(func, captureExpectation(expectationChainTerms), expectImpl, timeoutMillis);
     capturer.stack = originalStack;
     capturers.push(capturer);
     return capturer.returnValue.returnValue;
@@ -92,6 +93,10 @@ hereafter.useChaiExpect = function(chai) {
 hereafter.useJestExpect = function(expect) {
   expectImpl = expect;
   expectationChainTerms = extractChainableTermsFromJest(expect);
+};
+
+hereafter.setTimeoutMillis = function(millis) {
+  timeoutMillis = millis;
 };
 
 module.exports = hereafter;

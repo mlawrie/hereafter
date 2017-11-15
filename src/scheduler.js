@@ -2,9 +2,10 @@
 
 var Promise = require('bluebird');
 
-module.exports = function() {
+module.exports = function(timeoutMillis) {
   var attemptsLeft = 20;
 
+  console.log(timeoutMillis);
   var hasAttemptsLeft = function() {
       return attemptsLeft > 0;
   };
