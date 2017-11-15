@@ -1,6 +1,6 @@
 {
   "name": "hereafter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Asynchronous assertion library for fast, high-level behavioral testing",
   "main": "hereafter.js",
   "scripts": {
