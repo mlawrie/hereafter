@@ -41,7 +41,7 @@
     "watchify": "^3.8.0"
   },
   "peerDependencies": {
-    "chai": ">= 2.1.2"
+    "chai": ">= 2.1.2 < 5"
   },
   "dependencies": {
     "bluebird": "^3.4.6"
