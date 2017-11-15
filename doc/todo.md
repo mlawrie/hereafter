@@ -9,10 +9,9 @@ There are still some things left to do! This is really just notes for me right n
 - Typings
 - Support chai's chainable functions
 - Allow configuration of number of poll attempts?
-
+- Figure out if the network call tracking is robust
+- Implement network call tracking with fetch api (and xmlhttprequest?)
 
 ## Maybe:
-- Implement (much) longer polling for non-mocked endpoints?
 - Add note about chai length/lengthOf to docs
 - Improve test coverage of stacktrace handling
-- Improve performance of scheduler

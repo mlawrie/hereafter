@@ -18,15 +18,13 @@ var monkeyPatchImpl = function(original, protocol) {
     };
     
     return original.call(protocol, options, function(res) {
-    
       res.on('end', markComplete);
-
       callback(res);
     }).on('error', markComplete);
   };
 };
 
-var monkeyPatchProtocol = function(protocol) {
+var applyMonkeyPatch = function(protocol) {
   var originalGet = protocol.get;
   protocol.get = monkeyPatchImpl(originalGet, protocol);
 
@@ -34,7 +32,7 @@ var monkeyPatchProtocol = function(protocol) {
   protocol.request = monkeyPatchImpl(originalRequest, protocol);
 };
 
-monkeyPatchProtocol(require('http'));
+applyMonkeyPatch(require('http'));
 
 module.exports = {
   getOutstandingRequestCount: function() {
